@@ -1,0 +1,404 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby bati na Q&A ♡</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 20px 14px;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: #594966;
+  background: linear-gradient(135deg, #f5e8ff, #ffe8f1);
+}
+
+.container {
+  max-width: 540px;
+  margin: 20px auto;
+  padding: 25px 20px;
+  background: #fffaff;
+  border: 2px solid #ead7f5;
+  border-radius: 24px;
+  box-shadow: 0 8px 25px #b99bc533;
+}
+
+header { text-align: center; }
+
+.cat {
+  width: 115px;
+  height: 105px;
+  display: block;
+  margin: auto;
+}
+
+h1 { color: #a176bc; }
+
+.subtitle { color: #ad8ba8; }
+
+.question {
+  margin: 18px 0;
+  padding: 15px;
+  background: #f8f0ff;
+  border-radius: 15px;
+  text-align: left;
+}
+
+.question label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+textarea, input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #dec7eb;
+  border-radius: 11px;
+  background: white;
+  color: #594966;
+  font: inherit;
+}
+
+textarea {
+  min-height: 75px;
+  resize: vertical;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 22px;
+  background: #b98bd2;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover { background: #a579c2; }
+
+.secondary {
+  background: #e8b9d0;
+  color: #65475c;
+}
+
+.hidden { display: none !important; }
+
+#message {
+  text-align: center;
+  color: #956caa;
+  overflow-wrap: anywhere;
+  margin-top: 15px;
+}
+
+.admin-card {
+  margin: 15px 0;
+  padding: 16px;
+  border-radius: 14px;
+  background: #f8f0ff;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.admin-card p {
+  white-space: pre-wrap;
+  margin-top: 6px;
+}
+
+.admin-card h3 { color: #9c73b5; }
+
+.small {
+  color: #9a849f;
+  font-size: 13px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+<header>
+  <svg class="cat" viewBox="0 0 150 125"
+       xmlns="http://www.w3.org/2000/svg">
+    <path d="M25 48 L30 7 L62 32 Q75 25 88 32 L120 7 L125 48
+    Q137 64 130 91 Q120 120 75 120 Q30 120 20 91 Q13 64 25 48Z"
+    fill="white" stroke="#444" stroke-width="4"/>
+    <path d="M30 12 L34 47 Q45 31 62 32Z" fill="#333"/>
+    <path d="M120 12 L116 47 Q105 31 88 32Z" fill="#333"/>
+    <path d="M48 47 Q60 39 70 49 L65 73 Q50 79 43 65Z" fill="#333"/>
+    <path d="M102 47 Q90 39 80 49 L85 73 Q100 79 107 65Z" fill="#333"/>
+    <ellipse cx="54" cy="70" rx="5" ry="7" fill="#333"/>
+    <ellipse cx="96" cy="70" rx="5" ry="7" fill="#333"/>
+    <path d="M70 83 Q75 78 80 83 Q75 91 70 83Z" fill="#e99ab9"/>
+    <path d="M75 89 Q68 100 60 94 M75 89 Q82 100 90 94"
+    fill="none" stroke="#444" stroke-width="2"/>
+    <path d="M43 85 L12 80 M43 94 L12 98 M107 85 L138 80 M107 94 L138 98"
+    stroke="#777" stroke-width="2"/>
+  </svg>
+
+  <h1>Baby bati na Q&A ♡</h1>
+  <p class="subtitle">Please answer my three little questions, baby!</p>
+</header>
+
+<!-- VISITOR QUESTION FORM -->
+<section id="visitorArea">
+  <form id="visitorForm">
+
+    <div class="question">
+      <label for="answer1">1. Baby, bati na?</label>
+      <textarea id="answer1" placeholder="Write your answer here...Yes na kasi" required maxlength="1000"></textarea>
+    </div>
+
+    <div class="question">
+      <label for="answer2">2. Mahal ko, bati na po?</label>
+      <textarea id="answer2" placeholder="Write your answer here...Oo, bati na. Yiee" required maxlength="1000"></textarea>
+    </div>
+
+    <div class="question">
+      <label for="answer3">3. Baby ko, bati na di ba?</label>
+      <textarea id="answer3" placeholder="Write your answer here...Oo nga bati na hehe" required maxlength="1000"></textarea>
+    </div>
+
+    <button id="submitButton" type="submit">
+      Submit Answers ♡
+    </button>
+  </form>
+</section>
+
+<!-- ADMIN LOGIN -->
+<section id="loginArea" class="hidden">
+  <h2>Admin Login ♡</h2>
+
+  <form id="loginForm">
+    <input id="email" type="email"
+      placeholder="Admin email" required>
+
+    <input id="password" type="password"
+      placeholder="Password" required>
+
+    <button type="submit">Log in</button>
+  </form>
+</section>
+
+<!-- ADMIN ANSWERS -->
+<section id="adminArea" class="hidden">
+  <h2>Submitted Answers ♡</h2>
+  <p class="small">Only your admin account can see these answers.</p>
+
+  <button id="refreshButton" type="button" class="secondary">
+    Refresh Answers
+  </button>
+
+  <div id="submissionsList"></div>
+
+  <button id="logoutButton" type="button" class="secondary">
+    Log out
+  </button>
+</section>
+
+<button id="loginButton" class="secondary" type="button">
+  Admin Login
+</button>
+
+<p id="message" role="status"></p>
+
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+
+<script>
+// REPLACE THESE WITH YOUR ORIGINAL FIREBASE CONFIG VALUES
+const firebaseConfig = {
+  apiKey: "AIzaSyBDZ604GWEtKoyfwiaeofp_2kcwIirmI8w",
+  authDomain: "bati-na-tayo-qa.firebaseapp.com",
+  projectId: "bati-na-tayo-qa",
+  storageBucket: "bati-na-tayo-qa.firebasestorage.app",
+  messagingSenderId: "859737941196",
+  appId: "1:859737941196:web:710237c76744a51a518e69"
+};
+
+// REPLACE WITH YOUR ADMIN UID
+const ADMIN_UID = "DiEIEuP2pKbeA89xFGPlOFc4jn22";
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+const submissions = db.collection("submissions");
+
+const visitorArea = document.getElementById("visitorArea");
+const loginArea = document.getElementById("loginArea");
+const adminArea = document.getElementById("adminArea");
+const loginButton = document.getElementById("loginButton");
+const message = document.getElementById("message");
+
+// Show or hide admin login
+loginButton.addEventListener("click", () => {
+  loginArea.classList.toggle("hidden");
+});
+
+// VISITOR SUBMISSION
+document.getElementById("visitorForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const button = document.getElementById("submitButton");
+  button.disabled = true;
+  button.textContent = "Submitting...";
+
+  const answers = {
+    answer1: document.getElementById("answer1").value.trim(),
+    answer2: document.getElementById("answer2").value.trim(),
+    answer3: document.getElementById("answer3").value.trim(),
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+
+  try {
+    await submissions.add(answers);
+
+    document.getElementById("visitorForm").reset();
+    message.textContent = "Your answers have been submitted! Thank you ♡";
+  } catch (error) {
+    message.textContent = "Sorry, submission failed. Please try again.";
+  }
+
+  button.disabled = false;
+  button.textContent = "Submit Answers ♡";
+});
+
+// ADMIN LOGIN
+document.getElementById("loginForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  message.textContent = "Logging in...";
+
+  try {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const result = await auth.signInWithEmailAndPassword(email, password);
+
+    if (result.user.uid !== ADMIN_UID) {
+      await auth.signOut();
+      message.textContent = "You are not authorized.";
+    }
+  } catch (error) {
+    message.textContent = "Login failed. Check your email and password.";
+  }
+});
+
+// LOAD SUBMISSIONS FOR ADMIN ONLY
+async function loadSubmissions() {
+  const user = auth.currentUser;
+
+  if (!user || user.uid !== ADMIN_UID) {
+    return;
+  }
+
+  const list = document.getElementById("submissionsList");
+  list.textContent = "Loading answers...";
+
+  try {
+    const snapshot = await submissions
+      .orderBy("createdAt", "desc")
+      .get();
+
+    list.replaceChildren();
+
+    if (snapshot.empty) {
+      list.textContent = "No answers have been submitted yet.";
+      return;
+    }
+
+    snapshot.forEach((doc, index) => {
+      const data = doc.data();
+
+      const card = document.createElement("div");
+      card.className = "admin-card";
+
+      const heading = document.createElement("h3");
+      heading.textContent = "Submission " + (index + 1);
+      card.appendChild(heading);
+
+      const date = document.createElement("p");
+      date.className = "small";
+
+      if (data.createdAt) {
+        date.textContent = data.createdAt.toDate().toLocaleString();
+      } else {
+        date.textContent = "Date unavailable";
+      }
+
+      card.appendChild(date);
+
+      const questions = [
+        ["1. bati na?", data.answer1],
+        ["2. mahal, bati na", data.answer2],
+        ["3. baby ko, bati na", data.answer3]
+      ];
+
+      questions.forEach(([question, answer]) => {
+        const label = document.createElement("strong");
+        label.textContent = question;
+
+        const response = document.createElement("p");
+        response.textContent = answer || "(No answer)";
+
+        card.appendChild(label);
+        card.appendChild(response);
+      });
+
+      list.appendChild(card);
+    });
+
+  } catch (error) {
+    list.textContent = "Could not load submissions. Please check Firestore rules.";
+  }
+}
+
+// WATCH LOGIN STATE
+auth.onAuthStateChanged(async (user) => {
+  if (user && user.uid === ADMIN_UID) {
+    visitorArea.classList.add("hidden");
+    loginArea.classList.add("hidden");
+    loginButton.classList.add("hidden");
+    adminArea.classList.remove("hidden");
+
+    message.textContent = "Welcome, admin! ♡";
+    await loadSubmissions();
+
+  } else {
+    visitorArea.classList.remove("hidden");
+    loginButton.classList.remove("hidden");
+    adminArea.classList.add("hidden");
+
+    if (user) {
+      await auth.signOut();
+      message.textContent = "You are not authorized.";
+    }
+  }
+});
+
+// REFRESH ANSWERS
+document.getElementById("refreshButton").addEventListener("click", loadSubmissions);
+
+// LOG OUT
+document.getElementById("logoutButton").addEventListener("click", async () => {
+  await auth.signOut();
+  message.textContent = "You have logged out.";
+});
+</script>
+
+</body>
+</html>
